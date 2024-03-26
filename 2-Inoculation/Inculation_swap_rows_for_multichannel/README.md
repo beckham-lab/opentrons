@@ -3,7 +3,7 @@
 This OT-2 protocol uses a half-loaded multichannel pipette to transfer the inoculum from the overnight starter plate to the expression plates. This protocol requires the OT-2 p300 multichannel pipette. 
 
 
-![Inoculation row swap image](images/row_swap_inoculation.png)
+![Inoculation row swap image](../../images/row_swap_inoculation.png)
 
 ## Set-up:
 1. Prepare saturated starter cultures in a 96-deep-well plate.

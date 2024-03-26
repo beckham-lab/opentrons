@@ -3,7 +3,7 @@
 This OT-2 protocol uses a multichannel pipette to transfer the plasmids from the plasmid library plate to the transformation plate in a direct plate stamp. This protocol requires the OT-2 Temperature Module GEN2, a p300 multichannel (left), and a p20 multichannel pipette (right). 
 
 
-![Transformation plate-to-plate image](images/plate-to-plate-transformation.png)
+![Transformation plate-to-plate image](../../images/plate-to-plate-transformation.png)
 
 ## Set-up:
 1. Load the NEST 12-well reservoir with X mL of competent cells into well A1. 
