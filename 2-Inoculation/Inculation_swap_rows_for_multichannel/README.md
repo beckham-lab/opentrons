@@ -10,7 +10,7 @@ This OT-2 protocol uses a half-loaded multichannel pipette to transfer the inocu
 2. Fill four 24-deep-well plates with 2 mL of autoinduction media. 
 3. Load the pipette tips such that only rows A, C, E, G contain tips. 
 
-![Half-loaded tips image](images/half-loaded-tips.png)
+![Half-loaded tips image](../../images/half-loaded-tips.png)
 
 4. Calibrate the labware offsets:
 
