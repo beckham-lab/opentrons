@@ -3,7 +3,7 @@
 This OT-2 protocol uses a single channel pipette to transfer plasmids from up to 3 different plasmid plates to the transformation plate. An Excel template is provided to specify the source and destination wells. This protocol requires the OT-2 Temperature Module GEN2, a p300 multichannel, and a p20 single channel pipette.
 
 
-![Transformation cherrypicking image](.../images/transformation_cherrypicking.png)
+![Transformation cherrypicking image](.../.../images/transformation_cherrypicking.png)
 
 ## Set-up:
 
