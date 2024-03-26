@@ -3,7 +3,7 @@
 This OT-2 protocol uses a single channel pipette to transfer the inoculum from up to 3 different overnight starter plates to up to four 24-well expression plates. An Excel template is provided to specify the source and destination wells. This protocol requires the OT-2 p300 single channel pipette.
 
 
-![Inoculation cherrypicking image](../images/inoculation_cherrypicking.png)
+![Inoculation cherrypicking image](../../images/inoculation_cherrypicking.png)
 
 ## Set-up:
 
