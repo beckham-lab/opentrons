@@ -11,7 +11,8 @@ Most of these protocols return the tips to their rack for reuse in future protoc
 
 
 To do:
-Swap out custom labware paths 
+- Update amounts of reagents
+- Swap out custom labware paths 
 
 #custom_labware_file_path = 'path/to/your/custom_labware.json'
 
