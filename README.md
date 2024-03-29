@@ -3,6 +3,7 @@
 This repository contains scripts to perform automated steps in the recombinant expression and purification of proteins in *E. coli* assisted by the OT-2 robot. Futher details on the development and use of these protocols can be found in the paper cited below. 
 
 ## Comments
+- Some protocols display a 'Protocol analysis failure' warning when imported into Opentrons due to an error from defining the custom labware file path for simulation. Ignore the error and proceed to set up the run. 
 - In order to use the simulate function to test protocols, the user must define the path to the custom labware in each protocol script. 
 - Most of the available protocols return the tips to their rack to facilitate washing and reuse. 
 
