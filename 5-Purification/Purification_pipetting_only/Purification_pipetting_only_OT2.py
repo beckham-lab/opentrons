@@ -25,6 +25,9 @@ pipette_height_dispense_SUMO = 3 #dispense into liquid, use new tips each time
 
 pipette_mix_speed = 200 #uL/s
 
+time_for_mixing_with_protease = 4 #hours
+mixing_interval = 10 #min
+
 ############################################################################
 
 def run(Purification: protocol_api.ProtocolContext):
@@ -36,11 +39,11 @@ def run(Purification: protocol_api.ProtocolContext):
     
     wash_buffer = Purification.load_labware('nest_96_wellplate_2ml_deep', 2, label = 'Wash Buffer')
     cleavage_buffer = Purification.load_labware('nest_96_wellplate_2ml_deep', 3, label = 'Cleavage Buffer')
-    sumo_protease = Purification.load_labware('nest_96_wellplate_2ml_deep', 8, label = 'SUMO Protease')
+    protease_plate = Purification.load_labware('nest_96_wellplate_2ml_deep', 8, label = 'Protease Plate')
     waste = Purification.load_labware('nest_96_wellplate_2ml_deep', 9, label= 'Waste')
 
     tiprack_1 = Purification.load_labware('opentrons_96_tiprack_300ul', 4, label='300uL Tips for Purification')
-    tiprack_2 = Purification.load_labware('opentrons_96_tiprack_300ul', 7, label='300uL Tips for SUMO addition')
+    tiprack_2 = Purification.load_labware('opentrons_96_tiprack_300ul', 7, label='300uL Tips for protease addition')
     pipette_P300 = Purification.load_instrument('p300_multi_gen2', mount = 'left', tip_racks = [tiprack_1,tiprack_2])
 
     pipette_P300.flow_rate.aspirate = pipette_mix_speed
@@ -89,15 +92,31 @@ def run(Purification: protocol_api.ProtocolContext):
     Purification.pause('Add SUMO Protease to SUMO plate')
     
     ##### Protease Addition #####
-    pipette_P300.well_bottom_clearance.dispense = pipette_height_dispense_SUMO
-    pipette_P300.transfer(protease_volume,sumo_protease.columns(0),[mag_plate.columns()[column_number] for column_number in range(12)], new_tip='always', blow_out=True, blowout_location='destination well', mix_after=(2,200))
+    for column_number, column_name in dictonary.items():
+        pipette_P300.pick_up_tip(tiprack_2.wells_by_name()[column_name])
+        pipette_P300.well_bottom_clearance.dispense = pipette_height_dispense_SUMO
+        pipette_P300.transfer(protease_volume,protease_plate.columns(0),[mag_plate.columns()[column_number] for column_number in range(12)], new_tip='never', blow_out=True, blowout_location='destination well', mix_after=(2,200))
+        pipette_P300.blow_out()
+        pipette_P300.touch_tip()
+        pipette_P300.return_tip()
 
+    Purification.pause('Comtinue for pipette mixing or cancel run to seal plate and move to plate shaker.')
+
+    ##### Mixing for protease cleavage #####
+
+    # Calculate the total number of intervals for 4 hours
+    total_repetitions = int((time_for_mixing_with_protease * 60) / mixing_interval)
+
+    # Perform mixing for the calculated number of intervals
+    for _ in range(total_repetitions):
+        Purification.delay(minutes=mixing_interval)
+        for column_number, column_name in dictonary.items():
+            pipette_P300.pick_up_tip(tiprack_2.wells_by_name()[column_name])
+            pipette_P300.mix(3, 150, mag_plate[column_name])
+            pipette_P300.blow_out()
+            pipette_P300.touch_tip()
+            pipette_P300.return_tip()
+        
     
-
-
-    
-
-
-
 
 
