@@ -4,11 +4,11 @@ This OT-2 protocol uses a multichannel pipette to wash the magnetic beads and ad
 
 ## Set-up:
 
-1. Wash Buffer plate - each well loaded with 1.8 mL
+1. Wash Buffer plate - each well loaded with 1.2 mL
 
     Example buffer: 20 mM TRIS pH 8, 300 mM NaCl, 10 mM imidazole
 
-2. Cleavage Buffer plate - each well loaded with 1.8 mL
+2. Cleavage Buffer plate - each well loaded with 1.2 mL
 
     Example Buffer: 20 mM TRIS pH 8, 300 mM NaCl
 
