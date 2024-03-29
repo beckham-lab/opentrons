@@ -7,11 +7,6 @@ This repository contains scripts to perform automated steps in the recombinant e
 - Most of the available protocols return the tips to their rack to facilitate washing and reuse. 
 
 
-
-
-
-To do:
-- Update amounts of reagents (add how much competent cells to add to transformation reservoirs)
 - Swap out custom labware paths (#custom_labware_file_path = 'path/to/your/custom_labware.json')
 
 
