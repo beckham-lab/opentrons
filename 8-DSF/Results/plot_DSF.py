@@ -5,9 +5,9 @@ from scipy.signal import find_peaks
 import os
 
 #imports the Melt Curve Derivative & Amplification Results excel files (in format of export from Bio-Rad software)
-#it doesn't like the original results file - I found that just resaving as an .xlsx file works (even though it says it already is that)
+#errors with original results file - resaving as an .xlsx file fixes
 #make sure to examine the plots and reset the threshold for the derivative if needed
-#the import cuts out the last five rows (0.2 degrees C) of derivative data, bc values can get kind of weird at the end and mess up the threshold
+#the import cuts out the last five rows (0.2 degrees C) of derivative data that can mess up the threshold
 
 ### Variables ###
 threshold_deriv = -6
