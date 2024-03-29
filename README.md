@@ -5,10 +5,9 @@ This repository contains scripts to perform automated steps in the recombinant e
 ## Comments
 - Some protocols display a 'Protocol analysis failure' warning when imported into Opentrons due to an error from defining the custom labware file path for simulation. Ignore the error and proceed to set up the run. 
 - In order to use the simulate function to test protocols, the user must define the path to the custom labware in each protocol script. 
+    - Swap out custom_labware_file_path = 'path/to/your/custom_labware/
 - Most of the available protocols return the tips to their rack to facilitate washing and reuse. 
 
-
-- Swap out custom labware paths (#custom_labware_file_path = 'path/to/your/custom_labware.json')
 
 
 ## Citation
