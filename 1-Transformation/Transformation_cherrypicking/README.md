@@ -9,7 +9,7 @@ This OT-2 protocol uses a single channel pipette to transfer plasmids from up to
 
 1. Modify the input file with source plate(s) and source well locations.
 2. Modify the custom labware path in *Generate_transformation_cherrypicking_protocol.py* and run to output the OT-2 protocol. 
-3. Load the NEST 12-well reservoir with X mL of competent cells into well A1. 
+3. Load the NEST 12-well reservoir with 7 mL of competent cells into well A1. 
 4. Load 50 mL of LB into the NEST 195 mL 1-well reservoir in deck position 7. 
 5. Load 50 mL of LB with 3X antibiotic into the NEST 195 mL 1-well reservoir in deck position 6. 
 6. Run the protocol. 
