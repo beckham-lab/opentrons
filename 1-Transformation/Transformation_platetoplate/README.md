@@ -6,7 +6,7 @@ This OT-2 protocol uses a multichannel pipette to transfer the plasmids from the
 ![Transformation plate-to-plate image](../../images/plate-to-plate-transformation.png)
 
 ## Set-up:
-1. Load the NEST 12-well reservoir with X mL of competent cells into well A1. 
+1. Load the NEST 12-well reservoir with 7 mL of competent cells into well A1. 
 2. Load 50 mL of LB into the NEST 195 mL 1-well reservoir in deck position 7. 
 3. Load 50 mL of LB with 3X antibiotic into the NEST 195 mL 1-well reservoir in deck position 6. 
 6. Run the protocol. 
