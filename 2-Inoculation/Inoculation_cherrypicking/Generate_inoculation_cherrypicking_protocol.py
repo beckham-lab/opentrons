@@ -3,7 +3,7 @@ import os
 from datetime import date
 
 #modify path
-custom_labware_file_path = '/Users/bnortonb/Documents/OT-2/Custom Labware/twist_96_wellplate_400ul_P20multitest/thomsoninstrument_24_wellplate_10400ul.json'
+custom_labware_file_path = '/Users/bnortonb/Documents/Automation_paper/opentrons/Custom_labware/thomsoninstrument_24_wellplate_10400ul.json'
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
 
@@ -14,7 +14,6 @@ file_path_sourceplate3 = os.path.join(script_dir,'sourceplate3.xlsx')
 file_path_newplatemap= os.path.join(script_dir,'output_new_platemap.xlsx')
 
 directory = os.path.abspath(os.path.join(os.path.abspath(os.path.join(script_dir, os.pardir)), os.pardir))
-custom_labware_file_path = os.path.join(directory,'Custom_labware/thomsoninstrument_24_wellplate_10400ul.json')
 df_wells = pd.read_excel(file_path_wells)
 
 # group by source plate and create dictionary of dictionaries
@@ -24,7 +23,10 @@ for plate, data in df_wells.groupby('Source Plate'):
     for index, row in data.iterrows():
         # Check if Source Well is not nan before adding to the dictionary
         if pd.notna(row['Source Well']):
-            well_dict[row['Source Well']] = row['Destination Well']
+            if row['Source Well'] in well_dict:
+                well_dict[row['Source Well']].append(row['Destination Well'])
+            else:
+                well_dict[row['Source Well']] = [row['Destination Well']]
     plate_dict[plate] = well_dict
 
 #map to 4 24 well plates
@@ -58,12 +60,14 @@ for src_plate in plate_dict.keys():
         'cell_culture_plateD': []
     }
 
-for src_plate, well_dict in plate_dict.items():
-    for src_well, imagined_dest in well_dict.items():
-        real_plate, real_dest = plate_mapping[imagined_dest]
-        transfers[src_plate][real_plate].append((src_well, real_dest))
-
 transfer_commands = []
+
+for src_plate, well_dict in plate_dict.items():
+    for src_well, dest_wells in well_dict.items():
+        for dest_well in dest_wells:
+            real_plate, real_dest = plate_mapping[dest_well]
+            cmd = f"    pipette_300.transfer(inoculation_volume, {src_plate}.wells_by_name()['{src_well}'], {real_plate}.wells_by_name()['{real_dest}'], blow_out=True, blowout_location='destination well', touch_tip=False, new_tip='always', mix_before=(2, 100))"
+            transfer_commands.append(cmd)
 
 destination_order = ['cell_culture_plateA', 'cell_culture_plateB', 'cell_culture_plateC', 'cell_culture_plateD']
 rows = ["A", "B", "C", "D", "E", "F", "G", "H"]
@@ -87,16 +91,25 @@ for dest_plate in destination_order:
 
 transfer_section = "\n".join(transfer_commands)
 
-#Make a new plate map with Sample IDs
-
+# Make a new plate map with Sample IDs
 df_sourceplate1 = pd.read_excel(file_path_sourceplate1)
-df_sourceplate2 = pd.read_excel(file_path_sourceplate2)
-df_sourceplate3 = pd.read_excel(file_path_sourceplate3)
 
 # Create dictionaries for easier lookup of Sample ID
 sourceplate1_dict = dict(zip(df_sourceplate1['Well'], df_sourceplate1['Sample ID']))
-sourceplate2_dict = dict(zip(df_sourceplate2['Well'], df_sourceplate2['Sample ID']))
-sourceplate3_dict = dict(zip(df_sourceplate3['Well'], df_sourceplate3['Sample ID']))
+
+# Check if sourceplate2.xlsx exists before reading it
+if os.path.exists(file_path_sourceplate2):
+    df_sourceplate2 = pd.read_excel(file_path_sourceplate2)
+    sourceplate2_dict = dict(zip(df_sourceplate2['Well'], df_sourceplate2['Sample ID']))
+else:
+    sourceplate2_dict = {}
+
+# Check if sourceplate3.xlsx exists before reading it
+if os.path.exists(file_path_sourceplate3):
+    df_sourceplate3 = pd.read_excel(file_path_sourceplate3)
+    sourceplate3_dict = dict(zip(df_sourceplate3['Well'], df_sourceplate3['Sample ID']))
+else:
+    sourceplate3_dict = {}
 
 # For each row in the input_inoculation_cherrypicking Excel file, find the Sample ID
 sample_ids = []

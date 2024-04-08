@@ -7,7 +7,7 @@ metadata  = {
     'author' : "Brenna Norton-Baker"}
 
 #for simulate, modify path
-custom_labware_file_path = '/Users/bnortonb/Documents/Automation_paper/Protocol_code/Custom_labware/thomsoninstrument_24_wellplate_10400ul.json'
+custom_labware_file_path = '/Users/bnortonb/Documents/Automation_paper/opentrons/Custom_labware/thomsoninstrument_24_wellplate_10400ul.json'
 
 ########### Description ################
 # After transformation, this protocol inoculates 4 24-well plates containing media from 1 96-well plate containing transformed cells.
