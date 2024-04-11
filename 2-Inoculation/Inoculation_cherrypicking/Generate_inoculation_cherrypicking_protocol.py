@@ -11,6 +11,8 @@ file_path_wells = os.path.join(script_dir,'input_inoculation_cherrypicking.xlsx'
 file_path_sourceplate1 = os.path.join(script_dir,'sourceplate1.xlsx')
 file_path_sourceplate2 = os.path.join(script_dir,'sourceplate2.xlsx')
 file_path_sourceplate3 = os.path.join(script_dir,'sourceplate3.xlsx')
+file_path_sourceplate4 = os.path.join(script_dir,'sourceplate4.xlsx')
+file_path_sourceplate5 = os.path.join(script_dir,'sourceplate5.xlsx')
 file_path_newplatemap= os.path.join(script_dir,'output_new_platemap.xlsx')
 
 directory = os.path.abspath(os.path.join(os.path.abspath(os.path.join(script_dir, os.pardir)), os.pardir))
@@ -111,6 +113,20 @@ if os.path.exists(file_path_sourceplate3):
 else:
     sourceplate3_dict = {}
 
+# Check if sourceplate3.xlsx exists before reading it
+if os.path.exists(file_path_sourceplate4):
+    df_sourceplate4 = pd.read_excel(file_path_sourceplate4)
+    sourceplate4_dict = dict(zip(df_sourceplate4['Well'], df_sourceplate4['Sample ID']))
+else:
+    sourceplate4_dict = {}
+
+    # Check if sourceplate3.xlsx exists before reading it
+if os.path.exists(file_path_sourceplate5):
+    df_sourceplate5 = pd.read_excel(file_path_sourceplate5)
+    sourceplate5_dict = dict(zip(df_sourceplate5['Well'], df_sourceplate5['Sample ID']))
+else:
+    sourceplate5_dict = {}
+
 # For each row in the input_inoculation_cherrypicking Excel file, find the Sample ID
 sample_ids = []
 for _, row in df_wells.iterrows():
@@ -123,6 +139,10 @@ for _, row in df_wells.iterrows():
         sample_ids.append(sourceplate2_dict.get(well, 'N/A'))
     elif plate == 'sourceplate3':
         sample_ids.append(sourceplate3_dict.get(well, 'N/A'))
+    elif plate == 'sourceplate4':
+        sample_ids.append(sourceplate4_dict.get(well, 'N/A'))
+    elif plate == 'sourceplate4':
+        sample_ids.append(sourceplate5_dict.get(well, 'N/A'))
     else:
         sample_ids.append('N/A')
 
@@ -164,7 +184,7 @@ p300_well_bottom_clearance_dispense = 2
 ############# Protocol ###############
 def run(protocol: protocol_api.ProtocolContext):
 
-    tiprack_1 = protocol.load_labware('opentrons_96_filtertiprack_200ul', 1, label='200uL Filter Rack')
+    tiprack_1 = protocol.load_labware('opentrons_96_filtertiprack_200ul', 2, label='200uL Filter Rack')
     pipette_300 = protocol.load_instrument('p300_single_gen2', mount = 'left', tip_racks=[tiprack_1])
     
 
@@ -184,10 +204,13 @@ def run(protocol: protocol_api.ProtocolContext):
         cell_culture_plateC = protocol.load_labware('thomsoninstrument_24_wellplate_10400ul', 5, label = 'Cell Culture Plate C') 
         cell_culture_plateD = protocol.load_labware('thomsoninstrument_24_wellplate_10400ul', 6, label = 'Cell Culture Plate D')
 
-    sourceplate1 = protocol.load_labware('nest_96_wellplate_2ml_deep', 10, label = 'Source Plate 1')
-    sourceplate2 = protocol.load_labware('nest_96_wellplate_2ml_deep', 7, label = 'Source Plate 2')
-    sourceplate3 = protocol.load_labware('nest_96_wellplate_2ml_deep', 4, label = 'Source Plate 3')
-   
+    sourceplate1 = protocol.load_labware('nest_96_wellplate_2ml_deep', 1, label = 'Source Plate 1')
+    sourceplate2 = protocol.load_labware('nest_96_wellplate_2ml_deep', 4, label = 'Source Plate 2')
+    sourceplate3 = protocol.load_labware('nest_96_wellplate_2ml_deep', 7, label = 'Source Plate 3')
+    sourceplate4 = protocol.load_labware('nest_96_wellplate_2ml_deep', 10, label = 'Source Plate 4')
+    sourceplate5 = protocol.load_labware('nest_96_wellplate_2ml_deep', 11, label = 'Source Plate 5')
+
+       
     pipette_300.well_bottom_clearance.aspirate = p300_well_bottom_clearance_aspirate
     pipette_300.well_bottom_clearance.dispense = p300_well_bottom_clearance_dispense
 '''
