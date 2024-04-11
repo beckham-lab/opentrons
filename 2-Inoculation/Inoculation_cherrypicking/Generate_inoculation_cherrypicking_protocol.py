@@ -141,7 +141,7 @@ for _, row in df_wells.iterrows():
         sample_ids.append(sourceplate3_dict.get(well, 'N/A'))
     elif plate == 'sourceplate4':
         sample_ids.append(sourceplate4_dict.get(well, 'N/A'))
-    elif plate == 'sourceplate4':
+    elif plate == 'sourceplate5':
         sample_ids.append(sourceplate5_dict.get(well, 'N/A'))
     else:
         sample_ids.append('N/A')
