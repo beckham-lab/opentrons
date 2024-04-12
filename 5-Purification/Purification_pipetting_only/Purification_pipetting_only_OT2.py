@@ -95,14 +95,14 @@ def run(Purification: protocol_api.ProtocolContext):
     for column_number, column_name in dictonary.items():
         pipette_P300.pick_up_tip(tiprack_2.wells_by_name()[column_name])
         pipette_P300.well_bottom_clearance.dispense = pipette_height_dispense_SUMO
-        pipette_P300.transfer(protease_volume,protease_plate.columns(0),[mag_plate.columns()[column_number] for column_number in range(12)], new_tip='never', blow_out=True, blowout_location='destination well', mix_after=(2,200))
+        pipette_P300.transfer(protease_volume,protease_plate.columns(0),mag_plate.columns(column_number), new_tip='never', blow_out=True, blowout_location='destination well', mix_after=(2,200))
         pipette_P300.blow_out()
         pipette_P300.touch_tip()
         pipette_P300.return_tip()
 
     Purification.pause('Comtinue for pipette mixing or cancel run to seal plate and move to plate shaker.')
 
-    ##### Mixing for protease cleavage #####
+    #### Mixing for protease cleavage #####
 
     # Calculate the total number of intervals for 4 hours
     total_repetitions = int((time_for_mixing_with_protease * 60) / mixing_interval)
