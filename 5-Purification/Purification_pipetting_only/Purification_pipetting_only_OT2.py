@@ -11,7 +11,7 @@ metadata  = {
 
 ############ Variables #################
 
-mag_settle = 0.05 # time in min for mag beads to settle before removing supernatant
+mag_settle = 0.11 # time in min for mag beads to settle before removing supernatant
 
 supernatant_volume = 300 #uL
 protease_volume = 30 #uL
