@@ -13,4 +13,4 @@ This repository contains scripts to perform automated steps in the recombinant e
 
 
 ## Citation
-Norton-Baker, B., Denton, M.C.R., Murphy, N.P., Fram, B., Lim, S., Erickson, E., Gauthier, N.P., & Beckham, G.T. Enabling high-throughput enzyme discovery and engineering with a low-cost, robot-assisted pipeline.  *In review*
+Norton-Baker, B., Denton, M.C.R., Murphy, N.P., Fram, B., Lim, S., Erickson, E., Gauthier, N.P., & Beckham, G.T. Enabling high-throughput enzyme discovery and engineering with a low-cost, robot-assisted pipeline. _Scientific Reports_ **14**, 14449 (2024).
